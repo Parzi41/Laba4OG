@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "wPwgBt2PVPZ6pmN212zY5Jp6kOzQjX2V0NiC4C76DaaoTSApehcpYc6+PGhGsM1qm7745uKuAPNJf/rF7dPUEw==",
+  "success": true,
+  "projectFilePath": "D:\\Copy disc E\\Programms\\Prog lang\\Laba4\\Laba4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.drawing.common\\8.0.0\\system.drawing.common.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
