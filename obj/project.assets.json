@@ -2,6 +2,30 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "FortuneVoronoi/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "HandyCollections": "4.0.0"
+        },
+        "compile": {
+          "lib/net46/FortuneVoronoi.dll": {}
+        },
+        "runtime": {
+          "lib/net46/FortuneVoronoi.dll": {}
+        }
+      },
+      "HandyCollections/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "SwizzleMyVectors": "1.1.1"
+        },
+        "compile": {
+          "lib/net46/HandyCollections.dll": {}
+        },
+        "runtime": {
+          "lib/net46/HandyCollections.dll": {}
+        }
+      },
       "Microsoft.Win32.SystemEvents/8.0.0": {
         "type": "package",
         "compile": {
@@ -22,6 +46,15 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "SwizzleMyVectors/1.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net46/SwizzleMyVectors.dll": {}
+        },
+        "runtime": {
+          "lib/net46/SwizzleMyVectors.dll": {}
         }
       },
       "System.Drawing.Common/8.0.0": {
@@ -46,6 +79,30 @@
     }
   },
   "libraries": {
+    "FortuneVoronoi/4.0.0": {
+      "sha512": "d021bj3doj88pNaobymv606mVZsnW5OPeyoHcXXf446o2sOkRvHdRsYYydSHONjVeFuJX3vsOWIzjX6DT6znZg==",
+      "type": "package",
+      "path": "fortunevoronoi/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fortunevoronoi.4.0.0.nupkg.sha512",
+        "fortunevoronoi.nuspec",
+        "lib/net46/FortuneVoronoi.dll"
+      ]
+    },
+    "HandyCollections/4.0.0": {
+      "sha512": "Higd4jw0XqdoGkIX4/+kNIOdGLS+0TG0vRzvlGbRz/wvyp0vx6gkPaSYGIUlzuGioNpn5oCMfhcq8jEHaCGwbw==",
+      "type": "package",
+      "path": "handycollections/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "handycollections.4.0.0.nupkg.sha512",
+        "handycollections.nuspec",
+        "lib/net46/HandyCollections.dll"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/8.0.0": {
       "sha512": "9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw==",
       "type": "package",
@@ -79,6 +136,18 @@
         "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "SwizzleMyVectors/1.1.1": {
+      "sha512": "sGAlkx37ICxH4V8h9cMm2tECGMDcA8IUR6cZ/5y1+fR91KN+2FFOAtIs1zhTwSTwWHz/HibRLbXKoDG0QMASfw==",
+      "type": "package",
+      "path": "swizzlemyvectors/1.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net46/SwizzleMyVectors.dll",
+        "swizzlemyvectors.1.1.1.nupkg.sha512",
+        "swizzlemyvectors.nuspec"
       ]
     },
     "System.Drawing.Common/8.0.0": {
@@ -124,6 +193,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "FortuneVoronoi >= 4.0.0",
       "System.Drawing.Common >= 8.0.0"
     ]
   },
@@ -135,11 +205,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Copy disc E\\Programms\\Prog lang\\Laba4\\Laba4.csproj",
-      "projectName": "Laba4",
-      "projectPath": "D:\\Copy disc E\\Programms\\Prog lang\\Laba4\\Laba4.csproj",
+      "projectUniqueName": "D:\\Copy disc E\\Programms\\Prog lang\\Laba3\\Laba3.csproj",
+      "projectName": "Laba3",
+      "projectPath": "D:\\Copy disc E\\Programms\\Prog lang\\Laba3\\Laba3.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Copy disc E\\Programms\\Prog lang\\Laba4\\obj\\",
+      "outputPath": "D:\\Copy disc E\\Programms\\Prog lang\\Laba3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -175,6 +245,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "FortuneVoronoi": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
           "System.Drawing.Common": {
             "target": "Package",
             "version": "[8.0.0, )"
@@ -199,5 +273,37 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'FortuneVoronoi 4.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "FortuneVoronoi",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'HandyCollections 4.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "HandyCollections",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'SwizzleMyVectors 1.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "SwizzleMyVectors",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

@@ -1,79 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Numerics;
+using FortuneVoronoi;
 
 class Program
 {
     static void Main()
     {
-        // Зчитуємо датасет з файлу
-        List<Point> dataset = ReadDatasetFromFile("DS2.txt");
+        // Читаємо точки з файлу DS2.txt
+        string buff = File.ReadAllText("DS2.txt");
+        string[] point = buff.Split(' ', '\n', '\r');
 
-        // Виконуємо афінне перетворення (обертання)
-        List<Point> transformedDataset = PerformAffineTransformation(dataset, 10 * (2 + 1));
+        point = point.Where(o => o != "").ToArray();
 
-        // Встановлюємо розміри вікна (полотна – canvas size) 960x960 пікселів
-        int canvasWidth = 960;
-        int canvasHeight = 960;
+        List<Vector2> points = new List<Vector2> { };
 
-        // Відображаємо датасет після афінного перетворення точками синього кольору
-        using (Bitmap bitmap = new Bitmap(canvasWidth, canvasHeight))
-        using (Graphics g = Graphics.FromImage(bitmap))
+        for (int i = 0; i < point.Length; i++)
         {
-            g.Clear(Color.White); // Заливаємо білім кольором
-
-            foreach (Point point in transformedDataset)
+            if (i + 1 < point.Length)
             {
-                g.FillEllipse(Brushes.Blue, point.X - 5, point.Y - 5, 10, 10);
+                points.Add(new Vector2(Convert.ToInt32(point[i]), Convert.ToInt32(point[i + 1])));
             }
-
-            // Зберігаємо результат у файл графічного формату (PNG у цьому випадку)
-            bitmap.Save("output.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
-        Console.WriteLine("Transformation completed. Results saved to output.png");
+        Bitmap bitmap = DrawWeightCenters(points, 500, 500);
+        bitmap.Save("WeightCenters.png", ImageFormat.Png);
+
+        // Будуємо Діаграму Вороного
+        bitmap = DrawVoronoiDiagram(points, 500, 500);
+        bitmap.Save("VoronoiDiagram.png", ImageFormat.Png);
     }
 
-    static List<Point> ReadDatasetFromFile(string filePath)
+    // Метод для знаходження центрів ваги та відображення на координатній площині
+    static Bitmap DrawWeightCenters(List<Vector2> points, int width, int height)
     {
-        List<Point> dataset = new List<Point>();
+        Bitmap bitmap = new Bitmap(width, height);
+        using Graphics g = Graphics.FromImage(bitmap);
+        g.Clear(Color.White);
 
-        // Читаємо кожен рядок з файлу та розбиваємо його на координати X та Y
-        foreach (string line in File.ReadLines(filePath))
+        foreach (Vector2 point in points)
         {
-            string[] coordinates = line.Split(' ', '\n', '\r');
-            int x = int.Parse(coordinates[0]);
-            int y = int.Parse(coordinates[1]);
-            dataset.Add(new Point(x, y));
+            g.FillEllipse(Brushes.Red, point.X - 5, point.Y - 5, 10, 10);
         }
 
-        return dataset;
+        // Знаходження центрів ваги та відображення
+        Vector2 weightCenter = CalculateWeightCenter(points);
+        g.FillEllipse(Brushes.Blue, weightCenter.X - 5, weightCenter.Y - 5, 10, 10);
+
+        return bitmap;
     }
 
-    static List<Point> PerformAffineTransformation(List<Point> dataset, double angle)
+    // Метод для знаходження центра ваги
+    static Vector2 CalculateWeightCenter(List<Vector2> points)
     {
-        List<Point> transformedDataset = new List<Point>();
+        float totalX = 0;
+        float totalY = 0;
 
-        double radians = angle * Math.PI / 180.0;
-        double cosTheta = Math.Cos(radians);
-        double sinTheta = Math.Sin(radians);
-
-        // Визначаємо матрицю трансформації
-        double[,] transformationMatrix = {
-            { cosTheta, -sinTheta, 0 },
-            { sinTheta, cosTheta, 0 },
-            { (1 - cosTheta) * 480 + sinTheta * 480, -sinTheta * 480 + (1 - cosTheta) * 480, 1 }
-        };
-
-        // Застосовуємо матрицю трансформації до кожної точки
-        foreach (Point point in dataset)
+        foreach (Vector2 point in points)
         {
-            double x = point.X * transformationMatrix[0, 0] + point.Y * transformationMatrix[1, 0] + transformationMatrix[2, 0];
-            double y = point.X * transformationMatrix[0, 1] + point.Y * transformationMatrix[1, 1] + transformationMatrix[2, 1];
-            transformedDataset.Add(new Point((int)x, (int)y));
+            totalX += point.X;
+            totalY += point.Y;
         }
 
-        return transformedDataset;
+        float centerX = totalX / points.Count;
+        float centerY = totalY / points.Count;
+
+        return new Vector2(centerX, centerY);
     }
+
+    // Метод для побудови Діаграми Вороного
+    static Bitmap DrawVoronoiDiagram(List<Vector2> points, int width, int height)
+    {
+        // Побудова Діаграми Вороного
+        VoronoiGraph voronoiGraph = Fortune.ComputeVoronoiGraph(points);
+
+        Bitmap bitmap = new Bitmap(width, height);
+        using Graphics g = Graphics.FromImage(bitmap);
+        g.Clear(Color.White);
+
+        // Відображення ребер Діаграми Вороного
+        foreach (var edge in voronoiGraph.Edges)
+        {
+            if (edge.LeftData != null && edge.RightData != null)
+            {
+                PointF pointA = new PointF(edge.LeftData.X, edge.LeftData.Y);
+                PointF pointB = new PointF(edge.RightData.X, edge.RightData.Y);
+
+                g.DrawLine(Pens.Black, pointA, pointB);
+            }
+        }
+
+        // Відображення точок
+        foreach (Vector2 point in points)
+        {
+            g.FillEllipse(Brushes.Red, point.X - 5, point.Y - 5, 10, 10);
+        }
+
+        return bitmap;
+    }
+
 }

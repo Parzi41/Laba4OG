@@ -1,0 +1,119 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Laba3/1.0.0": {
+        "dependencies": {
+          "FortuneVoronoi": "4.0.0",
+          "System.Drawing.Common": "8.0.0"
+        },
+        "runtime": {
+          "Laba3.dll": {}
+        }
+      },
+      "FortuneVoronoi/4.0.0": {
+        "dependencies": {
+          "HandyCollections": "4.0.0"
+        },
+        "runtime": {
+          "lib/net46/FortuneVoronoi.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "HandyCollections/4.0.0": {
+        "dependencies": {
+          "SwizzleMyVectors": "1.1.1"
+        },
+        "runtime": {
+          "lib/net46/HandyCollections.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/8.0.0": {
+        "runtime": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "SwizzleMyVectors/1.1.1": {
+        "runtime": {
+          "lib/net46/SwizzleMyVectors.dll": {
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.0"
+          }
+        }
+      },
+      "System.Drawing.Common/8.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "8.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53105"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Laba3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FortuneVoronoi/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d021bj3doj88pNaobymv606mVZsnW5OPeyoHcXXf446o2sOkRvHdRsYYydSHONjVeFuJX3vsOWIzjX6DT6znZg==",
+      "path": "fortunevoronoi/4.0.0",
+      "hashPath": "fortunevoronoi.4.0.0.nupkg.sha512"
+    },
+    "HandyCollections/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Higd4jw0XqdoGkIX4/+kNIOdGLS+0TG0vRzvlGbRz/wvyp0vx6gkPaSYGIUlzuGioNpn5oCMfhcq8jEHaCGwbw==",
+      "path": "handycollections/4.0.0",
+      "hashPath": "handycollections.4.0.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw==",
+      "path": "microsoft.win32.systemevents/8.0.0",
+      "hashPath": "microsoft.win32.systemevents.8.0.0.nupkg.sha512"
+    },
+    "SwizzleMyVectors/1.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sGAlkx37ICxH4V8h9cMm2tECGMDcA8IUR6cZ/5y1+fR91KN+2FFOAtIs1zhTwSTwWHz/HibRLbXKoDG0QMASfw==",
+      "path": "swizzlemyvectors/1.1.1",
+      "hashPath": "swizzlemyvectors.1.1.1.nupkg.sha512"
+    },
+    "System.Drawing.Common/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JkbHJjtI/dWc5dfmEdJlbe3VwgZqCkZRtfuWFh5GOv0f+gGCfBtzMpIVkmdkj2AObO9y+oiOi81UGwH3aBYuqA==",
+      "path": "system.drawing.common/8.0.0",
+      "hashPath": "system.drawing.common.8.0.0.nupkg.sha512"
+    }
+  }
+}
