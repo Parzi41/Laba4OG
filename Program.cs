@@ -26,11 +26,11 @@ class Program
             }
         }
 
-        Bitmap bitmap = DrawWeightCenters(points, 500, 500);
+        Bitmap bitmap = DrawWeightCenters(points, 960, 540);
         bitmap.Save("WeightCenters.png", ImageFormat.Png);
 
         // Будуємо Діаграму Вороного
-        bitmap = DrawVoronoiDiagram(points, 500, 500);
+        bitmap = DrawVoronoiDiagram(points, 960, 540);
         bitmap.Save("VoronoiDiagram.png", ImageFormat.Png);
     }
 
