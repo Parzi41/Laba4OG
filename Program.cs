@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Numerics;
+using System.Linq;
 using FortuneVoronoi;
 
 class Program
@@ -18,26 +19,34 @@ class Program
 
         List<Vector2> points = new List<Vector2> { };
 
-        for (int i = 0; i < point.Length; i++)
+        for (int i = 0; i < point.Length; i += 2)
         {
             if (i + 1 < point.Length)
             {
-                points.Add(new Vector2(Convert.ToInt32(point[i]), Convert.ToInt32(point[i + 1])));
+                if (float.TryParse(point[i], out float x) && float.TryParse(point[i + 1], out float y))
+                {
+                    points.Add(new Vector2(x, y));
+                }
+                else
+                {
+                    // Обробка помилок при зчитуванні координат точок
+                    Console.WriteLine($"Помилка при зчитуванні координат точки {i / 2 + 1}");
+                }
             }
         }
 
-        Bitmap bitmap = DrawWeightCenters(points, 960, 540);
+        Bitmap bitmap = DrawWeightCenters(points);
         bitmap.Save("WeightCenters.png", ImageFormat.Png);
 
         // Будуємо Діаграму Вороного
-        bitmap = DrawVoronoiDiagram(points, 960, 540);
+        bitmap = DrawVoronoiDiagram(points);
         bitmap.Save("VoronoiDiagram.png", ImageFormat.Png);
     }
 
     // Метод для знаходження центрів ваги та відображення на координатній площині
-    static Bitmap DrawWeightCenters(List<Vector2> points, int width, int height)
+    static Bitmap DrawWeightCenters(List<Vector2> points)
     {
-        Bitmap bitmap = new Bitmap(width, height);
+        Bitmap bitmap = new Bitmap(960, 540);
         using Graphics g = Graphics.FromImage(bitmap);
         g.Clear(Color.White);
 
@@ -49,6 +58,13 @@ class Program
         // Знаходження центрів ваги та відображення
         Vector2 weightCenter = CalculateWeightCenter(points);
         g.FillEllipse(Brushes.Blue, weightCenter.X - 5, weightCenter.Y - 5, 10, 10);
+
+        // Відображення точок вихідного датасету з насиченістю 10%
+        foreach (Vector2 point in points)
+        {
+            g.FillEllipse(new SolidBrush(Color.FromArgb(25, 0, 0, 0)), point.X - 5, point.Y - 5, 10, 10);
+        }
+        Console.WriteLine("Saved to WeightCenters.png");
 
         return bitmap;
     }
@@ -72,12 +88,14 @@ class Program
     }
 
     // Метод для побудови Діаграми Вороного
-    static Bitmap DrawVoronoiDiagram(List<Vector2> points, int width, int height)
+    static Bitmap DrawVoronoiDiagram(List<Vector2> points)
     {
+        Console.WriteLine("Drawing voronoi diagram...");
+
         // Побудова Діаграми Вороного
         VoronoiGraph voronoiGraph = Fortune.ComputeVoronoiGraph(points);
 
-        Bitmap bitmap = new Bitmap(width, height);
+        Bitmap bitmap = new Bitmap(960, 540);
         using Graphics g = Graphics.FromImage(bitmap);
         g.Clear(Color.White);
 
@@ -98,8 +116,9 @@ class Program
         {
             g.FillEllipse(Brushes.Red, point.X - 5, point.Y - 5, 10, 10);
         }
+        
+        Console.WriteLine("Saved to VoronoiDiagram.png");
 
         return bitmap;
     }
-
 }
